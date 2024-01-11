@@ -9,7 +9,7 @@ on:
                 type: string
             run-number-offset:
                 required: true
-                type: integer
+                type: number
 
 env:
     IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.project-name }}
