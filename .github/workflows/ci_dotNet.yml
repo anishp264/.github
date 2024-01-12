@@ -40,9 +40,8 @@ jobs:
         run: echo "The test folder id is ${{ env.TEST_FOLDER }}"
 
       - name: Set up Image Tag
-        run: echo "MODIFIED_RUN_NUMBER=$((${{ github.run_number }} + ${{ github.event.inputs.run-number-offset }}))" >> $GITHUB_ENV
-
-      
+        run: echo "::set-env name=image_tag::$(($GITHUB_RUN_NUMBER + ${{ inputs.run-number-offset }}))"
+        
       - name: Delete WeatherSvc Directory
         run: |
           if [ -d "coverage" ]; then
