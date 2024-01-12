@@ -14,6 +14,8 @@ on:
 env:
     IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.project-name }}
     RUN_NUMBER_OFFSET: 131
+    PROJECT_NAME: ${{ inputs.project-name }}
+    TEST_FOLDER: ${{ inputs.project-name }}.tests
     
 jobs:
     setup-run-number:
@@ -40,7 +42,13 @@ jobs:
       steps:
       - name: Use modified run number
         run: echo "The modified run number is ${{ needs.setup-run-number.outputs.modified_run_number }}"
-      
+
+      - name: Show test env
+        run: echo "The test folder id is ${{ env.TEST_FOLDER }}"
+
+      - name: Set up Image Tag
+        run: echo "::set-env name=image_tag::$(($GITHUB_RUN_NUMBER + ${{ inputs.run-number-offset }}))"
+        
       - name: Delete WeatherSvc Directory
         run: |
           if [ -d "coverage" ]; then
