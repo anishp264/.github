@@ -38,6 +38,10 @@ jobs:
 
       - name: Show test env
         run: echo "The test folder id is ${{ env.TEST_FOLDER }}"
+
+      - name: Set up Image Tag
+        run: echo "MODIFIED_RUN_NUMBER=$((${{ github.run_number }} + ${{ github.event.inputs.run-number-offset }}))" >> $GITHUB_ENV
+
       
       - name: Delete WeatherSvc Directory
         run: |
