@@ -49,6 +49,15 @@ jobs:
       - name: Show test env
         run: echo "The test folder id is ${{ env.TEST_FOLDER }}"
 
+      - name: Checkout shared resources
+        uses: actions/checkout@v3
+        with: 
+                repository: anishp264/.github
+                path: 'share01'
+
+      - name: Read Hello File
+        run: cat share01/me.txt
+
       - name: Set up Image Tag
         run: echo "::set-env name=image_tag::$(($GITHUB_RUN_NUMBER + ${{ inputs.run-number-offset }}))"
         
@@ -79,15 +88,6 @@ jobs:
         
       - name: Build
         run: dotnet build --no-restore
-
-      - name: Checkout shared resources
-        uses: actions/checkout@v3
-        with: 
-                repository: anishp264/.github
-                path: 'share01'
-
-      - name: Read Hello File
-        run: cat share01/me.txt
         
       # Add coverlet.collector nuget package to test project - 'dotnet add <TestProject.cspoj> package coverlet
       - name: Test
