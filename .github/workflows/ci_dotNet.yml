@@ -60,9 +60,6 @@ jobs:
 
       - name: Read Hello File
         run: cat share01/me.txt
-
-      - name: Set up Image Tag
-        run: echo "::set-env name=image_tag::$(($GITHUB_RUN_NUMBER + ${{ inputs.run-number-offset }}))"
         
       - name: Delete WeatherSvc Directory
         run: |
