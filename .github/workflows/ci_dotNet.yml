@@ -60,6 +60,9 @@ jobs:
 
       - name: Read Hello File
         run: cat share01/me.txt
+
+      - name: Move Hello File
+        run: mv share01/me.txt me.txt
         
       - name: Delete WeatherSvc Directory
         run: |
@@ -138,6 +141,9 @@ jobs:
   
       - name: Write to Job Summary
         run: cat CodeCoverage/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Restore Hello File
+        run: mv me.txt share01/me.txt
 
       - name: Read Hello File
         run: cat share01/me.txt
