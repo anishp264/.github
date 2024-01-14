@@ -61,8 +61,10 @@ jobs:
       - name: Read Hello File
         run: cat share01/me.txt
 
-      - name: Move Hello File
-        run: mv share01/me.txt me.txt
+      - name: Move Hello File to Temp Location
+        run: |
+          mkdir -p temp_dir
+          mv share01/me.txt temp_dir/
         
       - name: Delete WeatherSvc Directory
         run: |
@@ -142,11 +144,13 @@ jobs:
       - name: Write to Job Summary
         run: cat CodeCoverage/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
 
-      - name: Restore Hello File
-        run: mv me.txt share01/me.txt
+      - name: Restore Hello File to a Working Directory
+        run: |
+          mkdir -p working_dir
+          mv temp_dir/me.txt working_dir/
 
       - name: Read Hello File
-        run: cat share01/me.txt
+        run: cat working_dir/me.txt
 
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v2
