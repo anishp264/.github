@@ -142,6 +142,9 @@ jobs:
       - name: Write to Job Summary
         run: cat CodeCoverage/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
 
+      - name: Read Hello File
+        run: cat share01/me.txt
+
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v2
         with:
