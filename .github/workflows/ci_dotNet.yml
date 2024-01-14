@@ -145,6 +145,9 @@ jobs:
       - name: Write to Job Summary
         run: cat CodeCoverage/SummaryGithub.md >> $GITHUB_STEP_SUMMARY
 
+      - name: Read Hello File AGAIN
+        run: cat /tmp/my_workflow/me.txt
+
       - name: Restore Hello File to a Working Directory
         run: |
           mkdir -p restored_files
