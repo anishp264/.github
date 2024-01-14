@@ -63,8 +63,9 @@ jobs:
 
       - name: Move Hello File to Temp Location
         run: |
-          mkdir -p temp_dir
-          mv share01/me.txt temp_dir/
+          mkdir -p /tmp/my_workflow
+          cp share01/me.txt /tmp/my_workflow/
+
         
       - name: Delete WeatherSvc Directory
         run: |
@@ -146,11 +147,11 @@ jobs:
 
       - name: Restore Hello File to a Working Directory
         run: |
-          mkdir -p working_dir
-          mv temp_dir/me.txt working_dir/
+          mkdir -p restored_files
+          cp /tmp/my_workflow/me.txt restored_files/
 
       - name: Read Hello File
-        run: cat working_dir/me.txt
+        run: cat restored_files/me.txt
 
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v2
