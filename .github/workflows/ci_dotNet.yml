@@ -79,6 +79,15 @@ jobs:
         
       - name: Build
         run: dotnet build --no-restore
+
+      - name: Checkout shared resources
+        uses: actions/checkout@v3
+        with: 
+                repository: anishp264/.github
+                path: 'share01'
+
+      - name: Read Hello File
+        run: cat share01/me.txt
         
       # Add coverlet.collector nuget package to test project - 'dotnet add <TestProject.cspoj> package coverlet
       - name: Test
