@@ -27,11 +27,14 @@ jobs:
             id: set_run_number
             run: echo "::set-output name=modified_run_number::$(($GITHUB_RUN_NUMBER + ${{ inputs.run-number-offset }}))"
 
-        #  - name: Copy me file
-        #    run: cp me.txt hello.txt
+          - name: Checkout shared resources
+            uses: actions/checkout@v3
+            with: 
+                repository: anishp264/.github
+                path: 'shared'
         
-        #  - name: Read Hello File
-        #    run: cat hello.txt
+          - name: Read Hello File
+            run: cat shared/me.txt
 
     build:
       needs: setup-run-number
