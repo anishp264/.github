@@ -53,6 +53,7 @@ jobs:
         uses: actions/checkout@v3
         with: 
                 repository: anishp264/.github
+                ref: 'master'
                 sparse-checkout: |
                   me.txt
                   sparse-checkout-cone-mode: false
@@ -168,6 +169,16 @@ jobs:
         #self-hosted
 
       steps:
+      - name: Checkout shared resources
+        uses: actions/checkout@v3
+        with: 
+                repository: anishp264/.github
+                ref: 'master'
+                sparse-checkout: |
+                  me.txt
+                  sparse-checkout-cone-mode: false
+                path: 'share01'
+                
       - name: Checkout code
         uses: actions/checkout@v3
 
